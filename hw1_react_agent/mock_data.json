@@ -1,0 +1,148 @@
+{
+  "menu": [
+    {
+      "id": "DISH-001",
+      "name": "Крем-суп із гарбуза та імбиру",
+      "category": "soups",
+      "price": 165,
+      "weight_g": 320,
+      "prep_time_min": 12,
+      "available": true,
+      "dietary_tags": ["vegetarian", "gluten_free"],
+      "allergens": ["dairy"],
+      "ingredients": ["гарбуз", "вершки", "імбир", "гарбузове насіння", "оливкова олія"]
+    },
+    {
+      "id": "DISH-002",
+      "name": "Борщ український з яловичиною та пампушками",
+      "category": "soups",
+      "price": 195,
+      "weight_g": 400,
+      "prep_time_min": 15,
+      "available": true,
+      "dietary_tags": [],
+      "allergens": ["gluten", "dairy"],
+      "ingredients": ["яловичина", "буряк", "капуста", "картопля", "сметана", "часникові пампушки"]
+    },
+    {
+      "id": "DISH-003",
+      "name": "Салат Нісуаз зі свіжим тунцем",
+      "category": "salads",
+      "price": 285,
+      "weight_g": 290,
+      "prep_time_min": 15,
+      "available": true,
+      "dietary_tags": ["gluten_free", "high_protein"],
+      "allergens": ["fish", "eggs"],
+      "ingredients": ["тунець", "мікс салату", "перепелині яйця", "томати чері", "стручкова квасоля", "оливки"]
+    },
+    {
+      "id": "DISH-004",
+      "name": "Теплий салат з кіноа, авокадо та печеним бататом",
+      "category": "salads",
+      "price": 240,
+      "weight_g": 310,
+      "prep_time_min": 14,
+      "available": true,
+      "dietary_tags": ["vegan", "vegetarian", "gluten_free", "lactose_free"],
+      "allergens": ["sesame"],
+      "ingredients": ["кіноа", "авокадо", "батат", "шпинат", "кунжут", "лимонна заправка"]
+    },
+    {
+      "id": "DISH-005",
+      "name": "Паста Карбонара з беконом",
+      "category": "mains",
+      "price": 250,
+      "weight_g": 340,
+      "prep_time_min": 18,
+      "available": true,
+      "dietary_tags": [],
+      "allergens": ["gluten", "dairy", "eggs"],
+      "ingredients": ["спагеті", "бекон", "пармезан", "жовток", "чорний перець"]
+    },
+    {
+      "id": "DISH-006",
+      "name": "Філе лосося на грилі зі спаржею",
+      "category": "mains",
+      "price": 420,
+      "weight_g": 280,
+      "prep_time_min": 22,
+      "available": false,
+      "dietary_tags": ["gluten_free", "lactose_free", "high_protein"],
+      "allergens": ["fish"],
+      "ingredients": ["лосось", "спаржа", "лимон", "оливкова олія", "розмарин"]
+    },
+    {
+      "id": "DISH-007",
+      "name": "Різото з білими грибами та трюфельною олією",
+      "category": "mains",
+      "price": 295,
+      "weight_g": 330,
+      "prep_time_min": 20,
+      "available": true,
+      "dietary_tags": ["vegetarian", "gluten_free"],
+      "allergens": ["dairy"],
+      "ingredients": ["рис арборіо", "білі гриби", "пармезан", "вершкове масло", "трюфельна олія"]
+    },
+    {
+      "id": "DISH-008",
+      "name": "Стейк з індички з овочами гриль",
+      "category": "mains",
+      "price": 275,
+      "weight_g": 350,
+      "prep_time_min": 20,
+      "available": true,
+      "dietary_tags": ["gluten_free", "lactose_free", "high_protein"],
+      "allergens": [],
+      "ingredients": ["філе індички", "цукіні", "перець болгарський", "печериці", "спеції"]
+    },
+    {
+      "id": "DISH-009",
+      "name": "Тарт татен з яблуками та ванільним морозивом",
+      "category": "desserts",
+      "price": 155,
+      "weight_g": 190,
+      "prep_time_min": 10,
+      "available": true,
+      "dietary_tags": ["vegetarian"],
+      "allergens": ["gluten", "dairy", "eggs"],
+      "ingredients": ["яблука", "листкове тісто", "вершкове масло", "кориця", "пломбір"]
+    },
+    {
+      "id": "DISH-010",
+      "name": "Чіа-пудинг на кокосовому молоці з манго",
+      "category": "desserts",
+      "price": 145,
+      "weight_g": 210,
+      "prep_time_min": 5,
+      "available": true,
+      "dietary_tags": ["vegan", "vegetarian", "gluten_free", "lactose_free"],
+      "allergens": [],
+      "ingredients": ["насіння чіа", "кокосове молоко", "пюре манго", "м'ята"]
+    },
+    {
+      "id": "DISH-011",
+      "name": "Лимонад маракуйя-розмарин",
+      "category": "drinks",
+      "price": 95,
+      "weight_g": 350,
+      "prep_time_min": 5,
+      "available": true,
+      "dietary_tags": ["vegan", "vegetarian", "gluten_free", "lactose_free"],
+      "allergens": [],
+      "ingredients": ["пюре маракуйї", "газована вода", "розмарин", "лайм", "тростинний цукор"]
+    },
+    {
+      "id": "DISH-012",
+      "name": "Лате на безлактозному молоці",
+      "category": "drinks",
+      "price": 85,
+      "weight_g": 250,
+      "prep_time_min": 4,
+      "available": true,
+      "dietary_tags": ["vegetarian", "gluten_free", "lactose_free"],
+      "allergens": [],
+      "ingredients": ["еспресо", "безлактозне молоко"]
+    }
+  ]
+}
