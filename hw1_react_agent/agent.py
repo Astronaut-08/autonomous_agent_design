@@ -1,8 +1,9 @@
 
 import json
 import time
+import re
 
-from typing import TypedDict, Annotated, Literal
+from typing import TypedDict, Annotated, Literal, cast
 from pathlib import Path
 from pydantic import Field, BaseModel
 from dataclasses import dataclass
@@ -10,11 +11,12 @@ from langgraph.graph import StateGraph, START, END
 from langgraph.graph.message import add_messages
 from langgraph.prebuilt import ToolNode
 from langchain_ollama import ChatOllama
-from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
+from langchain_core.messages import HumanMessage, SystemMessage, AIMessage, ToolMessage
 from langchain_core.runnables import RunnableConfig
 from tools import TOOLS
 from safety import MAX_STEPS, LoopDetector, STOP_NOTES, TIMEOUT_SECONDS, is_timed_out
 from logger import TrajectoryLogger
+from menu_data import find_dish
 
 
 # ── State ────────────────────────────────────────────────────────
@@ -30,6 +32,11 @@ class AgentState(TypedDict):
     step_count: int
     final_response: dict | None
     stop_reason: str | None 
+    formatter_fallback: bool | None
+
+class AnswerMeta(BaseModel):
+    confidence: float = Field(description="Впевненість у відповіді від 0 до 1.")
+    sources: list[str] = Field(description="id страв (DISH-XXX) з результатів tools, на які спирається відповідь.")
 
 @dataclass
 class RunContext:
@@ -43,10 +50,9 @@ class RunContext:
 # ── LLM з tools ──────────────────────────────────────────────────
 llm = ChatOllama(model='qwen3', temperature=0, reasoning=False)
 agent_llm = llm.bind_tools(TOOLS)
-formated_llm = llm.with_structured_output(AgentResponse)
-
-for t in TOOLS:
-    t.handle_validation_error = True
+meta_llm = ChatOllama(model="qwen3", temperature=0, reasoning=False,
+                      num_predict=200).with_structured_output(AnswerMeta)
+text_llm = ChatOllama(model="qwen3", temperature=0, reasoning=False, num_predict=300)
  
 # ── Вузол agent ──────────────────────────────────────────────────
 SYSTEM_PROMPT = (
@@ -55,10 +61,12 @@ SYSTEM_PROMPT = (
     "спершу викличи відповідний інструмент і спирайся лише на його результат. "
     "Порядок: search_items -> check_availability -> calculate_order. "
     "Для розрахунку суми обов'язково використай calculate_order. "
-    "Відповідай українською."
+    "Відповідай українською. "
     "Тип страви (десерти, напої, салати...) задавай параметром category, а не в query. "
     "Якщо страви з запиту немає в меню або вона недоступна (поле unavailable_matches), "
     "обов'язково повідом про це клієнту і не ігноруй позицію мовчки. "
+    "У фінальній відповіді вказуй назви, ціни, наявність і час приготування, "
+    "якщо вони є в результатах інструментів."
 )
 
 def _stop(ctx: RunContext, step: int, reason: str, dropped=None) -> dict:
@@ -108,34 +116,86 @@ def tools_node(state: AgentState, config: RunnableConfig) -> dict:
 
 # ── Вузол formatter ──────────────────────────────────────────────────
 FORMATTER_PROMPT = (
-    "На основі діалогу сформуй фінальну відповідь у форматі JSON з ключами: "
-    "'answer' (рядок українською), 'confidence' (число від 0 до 1), 'sources' (список рядків з id страв або назв tools). "
-    "Використовуй лише факти, отримані з результатів tools. Не додавай жодного тексту поза JSON."
-    "У 'answer' вказуй назви страв і їхні ціни. Якщо щось не знайдено або недоступне, скажи про це. "
-    "У 'sources' перелічи id страв з результатів tools; якщо нічого не знайдено, confidence не більше 0.5."
+    "Оціни відповідь асистента за результатами інструментів. Поверни JSON з ключами "
+    "'confidence' (число від 0 до 1: наскільки відповідь підтверджена результатами tools) і "
+    "'sources' (список id страв DISH-XXX з результатів tools, на які спирається відповідь). "
+    "Лише JSON, без іншого тексту."
 )
 
-def formatter_node(state: AgentState) -> dict:
-    try:
-        result = formated_llm.invoke([SystemMessage(FORMATTER_PROMPT), *state["messages"]])
-        payload = result.model_dump() if isinstance(result, BaseModel) else dict(result)
-    except Exception as e:
-        print(f"[formatter] fallback: {type(e).__name__}: {e}")   # щоб бачити справжню причину
-        fallback = llm.invoke([                                    # llm, а не agent_llm
-            SystemMessage("Сформуй коротку відповідь українською на основі діалогу."),
-            *state["messages"],
-        ])
-        payload = {
-            "answer": fallback.content or "Не вдалося сформувати відповідь.",
-            "confidence": 0.3,
-            "sources": [],
-        }
+DISH_ID_RE = re.compile(r"DISH-\d{3}")
 
+def _unavailable_from_tools(messages) -> dict[str, str]:
+    """id -> назва страв, які в результатах tools позначені як недоступні."""
+    found: dict[str, str] = {}
+    for m in messages:
+        if not isinstance(m, ToolMessage):
+            continue
+        try:
+            data = json.loads(m.content) # type: ignore[arg-type]
+        except (TypeError, ValueError):
+            continue
+        if not isinstance(data, dict):
+            continue
+        ids = [i["id"] for i in data.get("unavailable_matches", [])]
+        ids += [i["id"] for i in data.get("items", [])
+                if isinstance(i, dict) and i.get("status") == "unavailable"]
+        ids += data.get("unavailable", [])
+        for dish_id in ids:
+            dish = find_dish(dish_id)
+            found[dish_id] = dish["name"] if dish else dish_id
+    return found
+
+def formatter_node(state: AgentState, config: RunnableConfig) -> dict:
+    ctx: RunContext = (config.get("configurable") or {})["ctx"]
+    messages = state["messages"]
     reason = state.get("stop_reason")
+    last = messages[-1]
+    draft = last.content if (isinstance(last, AIMessage) and last.content and not reason) else None
+
+    tool_ids = {i for m in messages if isinstance(m, ToolMessage)
+                for i in DISH_ID_RE.findall(str(m.content))}
+
+    # 1. confidence і sources: інструкція йде ОСТАННІМ повідомленням від користувача,
+    #    інакше модель може «продовжити» відповідь асистента замість виконання інструкції
+    fallback_used = False
+    try:
+        meta = cast(AnswerMeta, meta_llm.invoke([*messages, HumanMessage(FORMATTER_PROMPT)]))
+        confidence = min(max(float(meta.confidence), 0.0), 1.0)
+        sources = sorted(set(meta.sources) & tool_ids) or sorted(tool_ids)
+    except Exception as e:
+        fallback_used = True
+        print(f"[formatter] fallback: {type(e).__name__}: {str(e)[:200]}")
+        confidence, sources = 0.3, sorted(tool_ids)
+
+    # 2. answer: з повідомлення агента; після зупинки короткий підсумок
+    if draft:
+        answer = draft
+    else:
+        try:
+            answer = text_llm.invoke([
+                *messages,
+                HumanMessage("Коротко підсумуй для клієнта українською, що вдалося з'ясувати "
+                             "з результатів інструментів. Не вигадуй фактів."),
+            ]).content
+        except Exception:
+            answer = ""
+        answer = answer or "Відповідь не сформовано."
+
+    # 3. гарантія: недоступні страви не губляться мовчки
+    unavailable = _unavailable_from_tools(messages)
+    if unavailable and "недоступн" not in answer.lower(): # type: ignore[arg-type]
+        names = ", ".join(f"«{n}»" for n in unavailable.values())
+        answer += f"\n\nУвага: зараз недоступно: {names}."
+
     if reason:
-        payload["answer"] = f"⚠️ {STOP_NOTES[reason]} {payload['answer']}"
-        payload["confidence"] = min(payload["confidence"], 0.3)
-    return {"final_response": payload}
+        answer = f"⚠️ {STOP_NOTES[reason]} {answer}"
+        confidence = min(confidence, 0.3)
+
+    payload = AgentResponse(answer=answer, confidence=confidence, sources=sources).model_dump() # type: ignore[arg-type]
+
+    ctx.logger.log_step(state.get("step_count", 0), "formatter", str(last.content),
+                        ("FALLBACK: " if fallback_used else "") + answer, []) # type: ignore[arg-type]
+    return {"final_response": payload, "formatter_fallback": fallback_used}
  
 # ── Router ───────────────────────────────────────────────────────
 def should_continue(state: AgentState) -> Literal["tools", "formatter"]:
@@ -163,6 +223,7 @@ def run_agent(query: str, *, max_steps: int = MAX_STEPS, timeout: float = TIMEOU
     state_input: AgentState = {
         "messages": [HumanMessage(content=query)],
         "step_count": 0, "final_response": None, "stop_reason": None,
+        'formatter_fallback': None
     }
     config: RunnableConfig = {"configurable": {"ctx": ctx}, "recursion_limit": 2 * max_steps + 5}
     result = app.invoke(state_input, config=config)

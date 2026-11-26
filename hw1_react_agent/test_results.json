@@ -4,89 +4,91 @@
     "complexity": "simple",
     "query": "Які десерти є в меню?",
     "expected": "Два десерти: тарт татен DISH-009 (155 грн) і чіа-пудинг DISH-010 (145 грн).",
-    "actual": "Чіа-пудинг на кокосовому молоці з манго — 145 грн, Тарт татен з яблуками та ванільним морозивом — 155 грн",
+    "actual": "В меню є такі десерти:\n\n1. **Чіа-пудинг на кокосовому молоці з манго**  \n   - Ціна: 145 грн  \n   - Наявність: Так  \n   - Час приготування: 5 хвилин  \n   - Дієтні теги: веганське, вегетаріанське, безглютенове, безлактозне  \n   - Алергени: Немає  \n\n2. **Тарт татен з яблуками та ванільним морозивом**  \n   - Ціна: 155 грн  \n   - Наявність: Так  \n   - Час приготування: 10 хвилин  \n   - Дієтні теги: вегетаріанське  \n   - Алергени: глютен, молоко, яйця",
     "confidence": 1.0,
     "sources": [
-      "DISH-010",
-      "DISH-009"
+      "DISH-009",
+      "DISH-010"
     ],
     "status": "success",
     "steps": 2,
     "tool_calls": [
       "search_items"
     ],
-    "elapsed_ms": 11670,
+    "elapsed_ms": 5936,
     "stop_reason": null,
     "max_steps_reached": false,
     "timeout_reached": false,
     "loop_detected": false,
+    "formatter_fallback": false,
     "missing_tools": [],
-    "missing_keywords": []
+    "missing_keywords": [],
+    "stub": false
   },
   {
     "test_id": "TC-002",
     "complexity": "simple",
     "query": "Які безлактозні напої коштують до 100 грн?",
     "expected": "Лимонад DISH-011 (95 грн) і лате на безлактозному молоці DISH-012 (85 грн).",
-    "actual": "Лате на безлактозному молоці — 85 грн, Лимонад маракуйя-розмарин — 95 грн",
+    "actual": "Ось безлактозні напої, які коштують до 100 грн:\n\n1. **Лате на безлактозному молоці** – 85 грн, доступне, час приготування: 4 хвилини.\n2. **Лимонад маракуйя-розмарин** – 95 грн, доступне, час приготування: 5 хвилин.",
     "confidence": 1.0,
     "sources": [
-      "DISH-012",
-      "DISH-011"
+      "DISH-011",
+      "DISH-012"
     ],
     "status": "success",
     "steps": 2,
     "tool_calls": [
       "search_items"
     ],
-    "elapsed_ms": 3990,
+    "elapsed_ms": 3350,
     "stop_reason": null,
     "max_steps_reached": false,
     "timeout_reached": false,
     "loop_detected": false,
+    "formatter_fallback": false,
     "missing_tools": [],
-    "missing_keywords": []
+    "missing_keywords": [],
+    "stub": false
   },
   {
     "test_id": "TC-003",
     "complexity": "medium",
     "query": "Порадь веганський салат до 250 грн і скажи, чи він доступний",
     "expected": "Теплий салат з кіноа DISH-004 (240 грн), він доступний.",
-    "actual": "Теплий салат з кіноа, авокадо та печеним бататом — 240 грн",
+    "actual": "Веганський салат \"Теплий салат з кіноа, авокадо та печеним бататом\" доступний. Ціна — 240 грн, час приготування — 14 хвилин.",
     "confidence": 1.0,
     "sources": [
       "DISH-004"
     ],
-    "status": "partial",
+    "status": "success",
     "steps": 3,
     "tool_calls": [
       "search_items",
       "check_availability"
     ],
-    "elapsed_ms": 3753,
+    "elapsed_ms": 3137,
     "stop_reason": null,
     "max_steps_reached": false,
     "timeout_reached": false,
     "loop_detected": false,
+    "formatter_fallback": false,
     "missing_tools": [],
-    "missing_keywords": [
-      [
-        "доступн"
-      ]
-    ]
+    "missing_keywords": [],
+    "stub": false
   },
   {
     "test_id": "TC-004",
     "complexity": "complex",
     "query": "Хочу 2 чіа-пудинги і лимонад. Скільки це коштує і скільки чекати?",
     "expected": "Разом 385 грн (2×145 + 95), орієнтовний час приготування 5 хв.",
-    "actual": "Чіа-пудинг на кокосовому молоці з манго (145 грн/штука) — 2 штуки, Лимонад маракуйя-розмарин (95 грн) — 1 штука. Всього: 385 грн.",
+    "actual": "Замовлення складає 385 грн. Орієнтовний час приготування — 5 хвилин. \n\nВаше замовлення:\n- 2 порції Чіа-пудингу на кокосовому молоці з манго (145 грн/порція)\n- 1 порція Лимонаду маракуйя-розмарин (95 грн/порція)",
     "confidence": 1.0,
     "sources": [
       "DISH-010",
       "DISH-011"
     ],
-    "status": "partial",
+    "status": "success",
     "steps": 4,
     "tool_calls": [
       "search_items",
@@ -94,29 +96,27 @@
       "check_availability",
       "calculate_order"
     ],
-    "elapsed_ms": 5976,
+    "elapsed_ms": 5883,
     "stop_reason": null,
     "max_steps_reached": false,
     "timeout_reached": false,
     "loop_detected": false,
+    "formatter_fallback": false,
     "missing_tools": [],
-    "missing_keywords": [
-      [
-        "5 хв"
-      ]
-    ]
+    "missing_keywords": [],
+    "stub": false
   },
   {
     "test_id": "TC-005",
     "complexity": "complex",
     "query": "Хочу замовити філе лосося і борщ. Порахуй суму.",
     "expected": "Лосось (DISH-006) зараз недоступний; агент повідомляє про це і не рахує замовлення з ним (або пропонує заміну).",
-    "actual": "Борщ український з яловичиною та пампушками - 195 грн.",
-    "confidence": 0.95,
+    "actual": "Замовлення \"Борщ український з яловичиною та пампушками\" готовий за 15 хвилин. Сума замовлення: 195 грн.\n\nУвага: зараз недоступно: «Філе лосося на грилі зі спаржею».",
+    "confidence": 1.0,
     "sources": [
       "DISH-002"
     ],
-    "status": "partial",
+    "status": "success",
     "steps": 4,
     "tool_calls": [
       "search_items",
@@ -124,46 +124,94 @@
       "check_availability",
       "calculate_order"
     ],
-    "elapsed_ms": 4758,
+    "elapsed_ms": 3999,
     "stop_reason": null,
     "max_steps_reached": false,
     "timeout_reached": false,
     "loop_detected": false,
+    "formatter_fallback": false,
     "missing_tools": [],
-    "missing_keywords": [
-      [
-        "лосос"
-      ],
-      [
-        "недоступн",
-        "немає",
-        "відсутн"
-      ]
-    ]
+    "missing_keywords": [],
+    "stub": false
   },
   {
     "test_id": "TC-006",
     "complexity": "complex",
     "query": "Хочу 2 чіа-пудинги і лимонад. Скільки це коштує і скільки чекати?",
-    "expected": "Часткова відповідь із повідомленням про ліміт кроків.",
-    "actual": "⚠️ Досягнуто ліміту кроків, відповідь часткова. 2 чіа-пудинги (Чіа-пудинг на кокосовому молоці з манго) коштують 290 грн, лимонад (Лимонад маракуйя-розмарин) - 95 грн. Чекати 5+5=10 хвилин.",
+    "expected": "Часткова відповідь із повідомленням про ліміт кроків (max_steps=2).",
+    "actual": "⚠️ Досягнуто ліміту кроків, відповідь часткова. З'ясовано, що чіа-пудинг на кокосовому молоці з манго коштує 145 грн, а лимонад маракуйя-розмарин — 95 грн. Обидва страви доступні, не мають алергенів, підходять для веганів, вегетаріанців, без глютену та лактози. Підготовка кожного страви займає приблизно 5 хвилин.",
     "confidence": 0.3,
     "sources": [
       "DISH-010",
       "DISH-011"
     ],
-    "status": "partial",
+    "status": "success",
     "steps": 2,
     "tool_calls": [
       "search_items",
       "search_items"
     ],
-    "elapsed_ms": 3889,
+    "elapsed_ms": 4779,
     "stop_reason": "max_steps",
     "max_steps_reached": true,
     "timeout_reached": false,
     "loop_detected": false,
+    "formatter_fallback": false,
     "missing_tools": [],
-    "missing_keywords": []
+    "missing_keywords": [],
+    "stub": false
+  },
+  {
+    "test_id": "TC-007",
+    "complexity": "complex",
+    "query": "Покажи всі десерти",
+    "expected": "Агент зупиняється за timeout і повертає часткову відповідь із повідомленням.",
+    "actual": "⚠️ Перевищено ліміт часу, відповідь часткова. З результатів інструментів виявлено, що у вашому меню є 2 напої, які підходять під критерій \"безлактозне молоко\" та \"без глютену\". Обидва доступні для замовлення.",
+    "confidence": 0.0,
+    "sources": [
+      "DISH-011",
+      "DISH-012"
+    ],
+    "status": "success",
+    "steps": 1,
+    "tool_calls": [
+      "search_items"
+    ],
+    "elapsed_ms": 2665,
+    "stop_reason": "timeout",
+    "max_steps_reached": false,
+    "timeout_reached": true,
+    "loop_detected": false,
+    "formatter_fallback": false,
+    "missing_tools": [],
+    "missing_keywords": [],
+    "stub": true
+  },
+  {
+    "test_id": "TC-008",
+    "complexity": "complex",
+    "query": "Покажи всі десерти",
+    "expected": "Агент зупиняється на 3-му однаковому виклику (LoopDetector).",
+    "actual": "⚠️ Виявлено зациклення (повторюваний виклик інструменту), відповідь часткова. З'ясовано, що у категорії \"десерти\" є 2 страви:  \n1. **Чіа-пудинг на кокосовому молоці з манго** – доступний, вартість 145 грн, підходить для веганів, вегетаріанців, без глютenu та лактози.  \n2. **Тарт татен з яблуками та ванільним морозивом** – доступний, вартість 155 грн, підходить для вегетаріанців, але містить глютен, молоко та яйця.",
+    "confidence": 0.3,
+    "sources": [
+      "DISH-009",
+      "DISH-010"
+    ],
+    "status": "success",
+    "steps": 3,
+    "tool_calls": [
+      "search_items",
+      "search_items"
+    ],
+    "elapsed_ms": 3430,
+    "stop_reason": "loop_detected",
+    "max_steps_reached": false,
+    "timeout_reached": false,
+    "loop_detected": true,
+    "formatter_fallback": false,
+    "missing_tools": [],
+    "missing_keywords": [],
+    "stub": true
   }
 ]

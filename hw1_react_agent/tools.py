@@ -191,11 +191,8 @@ def search_items(
     Результати відсортовані за зростанням ціни.
     """
     required_tags = set(dietary_tags or [])
-    results = []
-
+    results, hidden = [], []
     for dish in MENU:
-        if only_available and not dish.get("available", False):
-            continue
         if category and dish["category"] != category:
             continue
         if required_tags and not required_tags.issubset(dish.get("dietary_tags", [])):
@@ -208,6 +205,9 @@ def search_items(
             continue
         if query and not _matches_query(dish, query):
             continue
+        if only_available and not dish["available"]:   # остання перевірка
+            hidden.append({"id": dish["id"], "name": dish["name"]})
+            continue
         results.append(dish)
 
     results.sort(key=lambda d: d["price"])
@@ -216,18 +216,6 @@ def search_items(
                            "dietary_tags", "allergens", "prep_time_min")}
         for d in results[:limit]
     ]
-
-    results, hidden = [], []
-    for dish in MENU:
-        if category and dish["category"] != category:
-            continue
-        # ... решта фільтрів без only_available ...
-        if query and not _matches_query(dish, query):
-            continue
-        if only_available and not dish["available"]:
-            hidden.append({"id": dish["id"], "name": dish["name"]})
-            continue
-        results.append(dish)
 
     response = {"found": len(items), "items": items}
     if hidden:
@@ -334,3 +322,10 @@ def calculate_order(items: list[OrderLine]) -> str:
 
 
 TOOLS = [search_items, get_item_details, check_availability, calculate_order]
+
+def _format_validation_error(e) -> str:
+    parts = [f"{'.'.join(str(x) for x in err['loc'])}: {err['msg']}" for err in e.errors()]
+    return "Невалідні параметри виклику, виправте та повторіть: " + "; ".join(parts)
+
+for t in TOOLS:
+    t.handle_validation_error = _format_validation_error

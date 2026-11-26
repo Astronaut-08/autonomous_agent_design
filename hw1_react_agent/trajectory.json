@@ -2,12 +2,12 @@
   "TC-001": {
     "query": "Які десерти є в меню?",
     "stop_reason": null,
-    "total_steps": 3,
-    "total_time_ms": 11670,
+    "log_entries": 4,
+    "total_time_ms": 5935,
     "trajectory": [
       {
-        "step": 1,
-        "node": "agent",
+        "step_number": 1,
+        "node_name": "agent",
         "input": "Які десерти є в меню?",
         "output": "",
         "tool_calls": [
@@ -18,12 +18,12 @@
             }
           }
         ],
-        "timestamp": "2026-11-25T15:03:37.996297+00:00",
-        "elapsed_ms": 7460
+        "timestamp": "2026-11-26T17:12:54.920512+00:00",
+        "duration_ms": 1307
       },
       {
-        "step": 1,
-        "node": "tools",
+        "step_number": 1,
+        "node_name": "tools",
         "input": "[{\"name\": \"search_items\", \"args\": {\"category\": \"desserts\"}}]",
         "output": "{\"found\": 2, \"items\": [{\"id\": \"DISH-010\", \"name\": \"Чіа-пудинг на кокосовому молоці з манго\", \"category\": \"desserts\", \"price\": 145, \"available\": true, \"dietary_tags\": [\"vegan\", \"vegetarian\", \"gluten_free\", \"lactose_free\"], \"allergens\": [], \"prep_time_min\": 5}, {\"id\": \"DISH-009\", \"name\": \"Тарт татен з яблуками та ванільним морозивом\", \"category\": \"desserts\", \"price\": 155, \"available\": true, \"dietary_tags\": [\"vegetarian\"], \"allergens\": [\"gluten\", \"dairy\", \"eggs\"], \"prep_time_min\": 10}]}",
         "tool_calls": [
@@ -34,29 +34,38 @@
             }
           }
         ],
-        "timestamp": "2026-11-25T15:03:37.998611+00:00",
-        "elapsed_ms": 2
+        "timestamp": "2026-11-26T17:12:54.923149+00:00",
+        "duration_ms": 2
       },
       {
-        "step": 2,
-        "node": "agent",
+        "step_number": 2,
+        "node_name": "agent",
         "input": "{\"found\": 2, \"items\": [{\"id\": \"DISH-010\", \"name\": \"Чіа-пудинг на кокосовому молоці з манго\", \"category\": \"desserts\", \"price\": 145, \"available\": true, \"dietary_tags\": [\"vegan\", \"vegetarian\", \"gluten_free\", \"lactose_free\"], \"allergens\": [], \"prep_time_min\": 5}, {\"id\": \"DISH-009\", \"name\": \"Тарт татен з яблуками та ванільним морозивом\", \"category\": \"desserts\", \"price\": 155, \"available\": true, \"dietary_tags\": [\"vegetarian\"], \"allergens\": [\"gluten\", \"dairy\", \"eggs\"], \"prep_time_min\": 10}]}",
-        "output": "У нас є такі десерти:\n\n1. **Чіа-пудинг на кокосовому молоці з манго** — 145 грн, готовий за 5 хвилин.\n2. **Тарт татен з яблуками та ванільним морозивом** — 155 грн, готовий за 10 хвилин.\n\nОбидва десерти доступні для замовлення. Якщо ви хочете, можу допомогти з розрахунком вартості або рекомендаціями!",
+        "output": "В меню є такі десерти:\n\n1. **Чіа-пудинг на кокосовому молоці з манго**  \n   - Ціна: 145 грн  \n   - Наявність: Так  \n   - Час приготування: 5 хвилин  \n   - Дієтні теги: веганське, вегетаріанське, безглютенове, безлактозне  \n   - Алергени: Немає  \n\n2. **Тарт татен з яблуками та ванільним морозивом**  \n   - Ціна: 155 грн  \n   - Наявність: Так  \n   - Час приготування: 10 хвилин  \n   - Дієтні теги: вегетаріанське  \n   - Алергени: глютен, молоко, яйця",
         "tool_calls": [],
-        "timestamp": "2026-11-25T15:03:40.471500+00:00",
-        "elapsed_ms": 2472
+        "timestamp": "2026-11-26T17:12:58.749582+00:00",
+        "duration_ms": 3826
+      },
+      {
+        "step_number": 2,
+        "node_name": "formatter",
+        "input": "В меню є такі десерти:\n\n1. **Чіа-пудинг на кокосовому молоці з манго**  \n   - Ціна: 145 грн  \n   - Наявність: Так  \n   - Час приготування: 5 хвилин  \n   - Дієтні теги: веганське, вегетаріанське, безглютенове, безлактозне  \n   - Алергени: Немає  \n\n2. **Тарт татен з яблуками та ванільним морозивом**  \n   - Ціна: 155 грн  \n   - Наявність: Так  \n   - Час приготування: 10 хвилин  \n   - Дієтні теги: вегетаріанське  \n   - Алергени: глютен, молоко, яйця",
+        "output": "В меню є такі десерти:\n\n1. **Чіа-пудинг на кокосовому молоці з манго**  \n   - Ціна: 145 грн  \n   - Наявність: Так  \n   - Час приготування: 5 хвилин  \n   - Дієтні теги: веганське, вегетаріанське, безглютенове, безлактозне  \n   - Алергени: Немає  \n\n2. **Тарт татен з яблуками та ванільним морозивом**  \n   - Ціна: 155 грн  \n   - Наявність: Так  \n   - Час приготування: 10 хвилин  \n   - Дієтні теги: вегетаріанське  \n   - Алергени: глютен, молоко, яйця",
+        "tool_calls": [],
+        "timestamp": "2026-11-26T17:12:59.548200+00:00",
+        "duration_ms": 798
       }
     ]
   },
   "TC-002": {
     "query": "Які безлактозні напої коштують до 100 грн?",
     "stop_reason": null,
-    "total_steps": 3,
-    "total_time_ms": 3989,
+    "log_entries": 4,
+    "total_time_ms": 3349,
     "trajectory": [
       {
-        "step": 1,
-        "node": "agent",
+        "step_number": 1,
+        "node_name": "agent",
         "input": "Які безлактозні напої коштують до 100 грн?",
         "output": "",
         "tool_calls": [
@@ -64,56 +73,65 @@
             "name": "search_items",
             "args": {
               "category": "drinks",
-              "max_price": 100,
               "dietary_tags": [
                 "lactose_free"
-              ]
+              ],
+              "max_price": 100
             }
           }
         ],
-        "timestamp": "2026-11-25T15:03:43.059125+00:00",
-        "elapsed_ms": 852
+        "timestamp": "2026-11-26T17:13:00.350302+00:00",
+        "duration_ms": 800
       },
       {
-        "step": 1,
-        "node": "tools",
-        "input": "[{\"name\": \"search_items\", \"args\": {\"category\": \"drinks\", \"max_price\": 100, \"dietary_tags\": [\"lactose_free\"]}}]",
+        "step_number": 1,
+        "node_name": "tools",
+        "input": "[{\"name\": \"search_items\", \"args\": {\"category\": \"drinks\", \"dietary_tags\": [\"lactose_free\"], \"max_price\": 100}}]",
         "output": "{\"found\": 2, \"items\": [{\"id\": \"DISH-012\", \"name\": \"Лате на безлактозному молоці\", \"category\": \"drinks\", \"price\": 85, \"available\": true, \"dietary_tags\": [\"vegetarian\", \"gluten_free\", \"lactose_free\"], \"allergens\": [], \"prep_time_min\": 4}, {\"id\": \"DISH-011\", \"name\": \"Лимонад маракуйя-розмарин\", \"category\": \"drinks\", \"price\": 95, \"available\": true, \"dietary_tags\": [\"vegan\", \"vegetarian\", \"gluten_free\", \"lactose_free\"], \"allergens\": [], \"prep_time_min\": 5}]}",
         "tool_calls": [
           {
             "name": "search_items",
             "args": {
               "category": "drinks",
-              "max_price": 100,
               "dietary_tags": [
                 "lactose_free"
-              ]
+              ],
+              "max_price": 100
             }
           }
         ],
-        "timestamp": "2026-11-25T15:03:43.060883+00:00",
-        "elapsed_ms": 1
+        "timestamp": "2026-11-26T17:13:00.352253+00:00",
+        "duration_ms": 1
       },
       {
-        "step": 2,
-        "node": "agent",
+        "step_number": 2,
+        "node_name": "agent",
         "input": "{\"found\": 2, \"items\": [{\"id\": \"DISH-012\", \"name\": \"Лате на безлактозному молоці\", \"category\": \"drinks\", \"price\": 85, \"available\": true, \"dietary_tags\": [\"vegetarian\", \"gluten_free\", \"lactose_free\"], \"allergens\": [], \"prep_time_min\": 4}, {\"id\": \"DISH-011\", \"name\": \"Лимонад маракуйя-розмарин\", \"category\": \"drinks\", \"price\": 95, \"available\": true, \"dietary_tags\": [\"vegan\", \"vegetarian\", \"gluten_free\", \"lactose_free\"], \"allergens\": [], \"prep_time_min\": 5}]}",
-        "output": "Ось безлактозні напої, які коштують до 100 грн:\n\n1. **Лате на безлактозному молоці** — 85 грн, готовиться 4 хвилини.\n2. **Лимонад маракуйя-розмарин** — 95 грн, готовиться 5 хвилин.\n\nОбидва напої доступні для замовлення.",
+        "output": "Ось безлактозні напої, які коштують до 100 грн:\n\n1. **Лате на безлактозному молоці** – 85 грн, доступне, час приготування: 4 хвилини.\n2. **Лимонад маракуйя-розмарин** – 95 грн, доступне, час приготування: 5 хвилин.",
         "tool_calls": [],
-        "timestamp": "2026-11-25T15:03:44.851409+00:00",
-        "elapsed_ms": 1790
+        "timestamp": "2026-11-26T17:13:02.204229+00:00",
+        "duration_ms": 1851
+      },
+      {
+        "step_number": 2,
+        "node_name": "formatter",
+        "input": "Ось безлактозні напої, які коштують до 100 грн:\n\n1. **Лате на безлактозному молоці** – 85 грн, доступне, час приготування: 4 хвилини.\n2. **Лимонад маракуйя-розмарин** – 95 грн, доступне, час приготування: 5 хвилин.",
+        "output": "Ось безлактозні напої, які коштують до 100 грн:\n\n1. **Лате на безлактозному молоці** – 85 грн, доступне, час приготування: 4 хвилини.\n2. **Лимонад маракуйя-розмарин** – 95 грн, доступне, час приготування: 5 хвилин.",
+        "tool_calls": [],
+        "timestamp": "2026-11-26T17:13:02.898697+00:00",
+        "duration_ms": 694
       }
     ]
   },
   "TC-003": {
     "query": "Порадь веганський салат до 250 грн і скажи, чи він доступний",
     "stop_reason": null,
-    "total_steps": 5,
-    "total_time_ms": 3753,
+    "log_entries": 6,
+    "total_time_ms": 3136,
     "trajectory": [
       {
-        "step": 1,
-        "node": "agent",
+        "step_number": 1,
+        "node_name": "agent",
         "input": "Порадь веганський салат до 250 грн і скажи, чи він доступний",
         "output": "",
         "tool_calls": [
@@ -129,12 +147,12 @@
             }
           }
         ],
-        "timestamp": "2026-11-25T15:03:47.075567+00:00",
-        "elapsed_ms": 878
+        "timestamp": "2026-11-26T17:13:03.772219+00:00",
+        "duration_ms": 872
       },
       {
-        "step": 1,
-        "node": "tools",
+        "step_number": 1,
+        "node_name": "tools",
         "input": "[{\"name\": \"search_items\", \"args\": {\"query\": \"салат\", \"category\": \"salads\", \"dietary_tags\": [\"vegan\"], \"max_price\": 250}}]",
         "output": "{\"found\": 1, \"items\": [{\"id\": \"DISH-004\", \"name\": \"Теплий салат з кіноа, авокадо та печеним бататом\", \"category\": \"salads\", \"price\": 240, \"available\": true, \"dietary_tags\": [\"vegan\", \"vegetarian\", \"gluten_free\", \"lactose_free\"], \"allergens\": [\"sesame\"], \"prep_time_min\": 14}]}",
         "tool_calls": [
@@ -150,12 +168,12 @@
             }
           }
         ],
-        "timestamp": "2026-11-25T15:03:47.079635+00:00",
-        "elapsed_ms": 4
+        "timestamp": "2026-11-26T17:13:03.776264+00:00",
+        "duration_ms": 4
       },
       {
-        "step": 2,
-        "node": "agent",
+        "step_number": 2,
+        "node_name": "agent",
         "input": "{\"found\": 1, \"items\": [{\"id\": \"DISH-004\", \"name\": \"Теплий салат з кіноа, авокадо та печеним бататом\", \"category\": \"salads\", \"price\": 240, \"available\": true, \"dietary_tags\": [\"vegan\", \"vegetarian\", \"gluten_free\", \"lactose_free\"], \"allergens\": [\"sesame\"], \"prep_time_min\": 14}]}",
         "output": "",
         "tool_calls": [
@@ -168,12 +186,12 @@
             }
           }
         ],
-        "timestamp": "2026-11-25T15:03:47.631771+00:00",
-        "elapsed_ms": 552
+        "timestamp": "2026-11-26T17:13:04.335685+00:00",
+        "duration_ms": 559
       },
       {
-        "step": 2,
-        "node": "tools",
+        "step_number": 2,
+        "node_name": "tools",
         "input": "[{\"name\": \"check_availability\", \"args\": {\"item_ids\": [\"DISH-004\"]}}]",
         "output": "{\"all_available\": true, \"items\": [{\"id\": \"DISH-004\", \"name\": \"Теплий салат з кіноа, авокадо та печеним бататом\", \"status\": \"available\"}]}",
         "tool_calls": [
@@ -186,29 +204,38 @@
             }
           }
         ],
-        "timestamp": "2026-11-25T15:03:47.633451+00:00",
-        "elapsed_ms": 1
+        "timestamp": "2026-11-26T17:13:04.337170+00:00",
+        "duration_ms": 1
       },
       {
-        "step": 3,
-        "node": "agent",
+        "step_number": 3,
+        "node_name": "agent",
         "input": "{\"all_available\": true, \"items\": [{\"id\": \"DISH-004\", \"name\": \"Теплий салат з кіноа, авокадо та печеним бататом\", \"status\": \"available\"}]}",
-        "output": "Веганський салат \"Теплий салат з кіноа, авокадо та печеним бататом\" доступний. Його ціна — 240 грн, а час приготування — 14 хвилин.",
+        "output": "Веганський салат \"Теплий салат з кіноа, авокадо та печеним бататом\" доступний. Ціна — 240 грн, час приготування — 14 хвилин.",
         "tool_calls": [],
-        "timestamp": "2026-11-25T15:03:48.792376+00:00",
-        "elapsed_ms": 1158
+        "timestamp": "2026-11-26T17:13:05.422971+00:00",
+        "duration_ms": 1085
+      },
+      {
+        "step_number": 3,
+        "node_name": "formatter",
+        "input": "Веганський салат \"Теплий салат з кіноа, авокадо та печеним бататом\" доступний. Ціна — 240 грн, час приготування — 14 хвилин.",
+        "output": "Веганський салат \"Теплий салат з кіноа, авокадо та печеним бататом\" доступний. Ціна — 240 грн, час приготування — 14 хвилин.",
+        "tool_calls": [],
+        "timestamp": "2026-11-26T17:13:06.033750+00:00",
+        "duration_ms": 610
       }
     ]
   },
   "TC-004": {
     "query": "Хочу 2 чіа-пудинги і лимонад. Скільки це коштує і скільки чекати?",
     "stop_reason": null,
-    "total_steps": 7,
-    "total_time_ms": 5975,
+    "log_entries": 8,
+    "total_time_ms": 5882,
     "trajectory": [
       {
-        "step": 1,
-        "node": "agent",
+        "step_number": 1,
+        "node_name": "agent",
         "input": "Хочу 2 чіа-пудинги і лимонад. Скільки це коштує і скільки чекати?",
         "output": "",
         "tool_calls": [
@@ -223,19 +250,19 @@
           {
             "name": "search_items",
             "args": {
+              "limit": 1,
               "query": "лимонад",
-              "category": "drinks",
-              "limit": 1
+              "category": "drinks"
             }
           }
         ],
-        "timestamp": "2026-11-25T15:03:51.234966+00:00",
-        "elapsed_ms": 1283
+        "timestamp": "2026-11-26T17:13:07.343212+00:00",
+        "duration_ms": 1305
       },
       {
-        "step": 1,
-        "node": "tools",
-        "input": "[{\"name\": \"search_items\", \"args\": {\"query\": \"чіа-пудинг\", \"category\": \"desserts\", \"limit\": 2}}, {\"name\": \"search_items\", \"args\": {\"query\": \"лимонад\", \"category\": \"drinks\", \"limit\": 1}}]",
+        "step_number": 1,
+        "node_name": "tools",
+        "input": "[{\"name\": \"search_items\", \"args\": {\"query\": \"чіа-пудинг\", \"category\": \"desserts\", \"limit\": 2}}, {\"name\": \"search_items\", \"args\": {\"limit\": 1, \"query\": \"лимонад\", \"category\": \"drinks\"}}]",
         "output": "{\"found\": 1, \"items\": [{\"id\": \"DISH-010\", \"name\": \"Чіа-пудинг на кокосовому молоці з манго\", \"category\": \"desserts\", \"price\": 145, \"available\": true, \"dietary_tags\": [\"vegan\", \"vegetarian\", \"gluten_free\", \"lactose_free\"], \"allergens\": [], \"prep_time_min\": 5}]} | {\"found\": 1, \"items\": [{\"id\": \"DISH-011\", \"name\": \"Лимонад маракуйя-розмарин\", \"category\": \"drinks\", \"price\": 95, \"available\": true, \"dietary_tags\": [\"vegan\", \"vegetarian\", \"gluten_free\", \"lactose_free\"], \"allergens\": [], \"prep_time_min\"",
         "tool_calls": [
           {
@@ -249,18 +276,18 @@
           {
             "name": "search_items",
             "args": {
+              "limit": 1,
               "query": "лимонад",
-              "category": "drinks",
-              "limit": 1
+              "category": "drinks"
             }
           }
         ],
-        "timestamp": "2026-11-25T15:03:51.237602+00:00",
-        "elapsed_ms": 2
+        "timestamp": "2026-11-26T17:13:07.347577+00:00",
+        "duration_ms": 4
       },
       {
-        "step": 2,
-        "node": "agent",
+        "step_number": 2,
+        "node_name": "agent",
         "input": "{\"found\": 1, \"items\": [{\"id\": \"DISH-011\", \"name\": \"Лимонад маракуйя-розмарин\", \"category\": \"drinks\", \"price\": 95, \"available\": true, \"dietary_tags\": [\"vegan\", \"vegetarian\", \"gluten_free\", \"lactose_free\"], \"allergens\": [], \"prep_time_min\": 5}]}",
         "output": "",
         "tool_calls": [
@@ -274,12 +301,12 @@
             }
           }
         ],
-        "timestamp": "2026-11-25T15:03:51.980718+00:00",
-        "elapsed_ms": 743
+        "timestamp": "2026-11-26T17:13:08.058294+00:00",
+        "duration_ms": 710
       },
       {
-        "step": 2,
-        "node": "tools",
+        "step_number": 2,
+        "node_name": "tools",
         "input": "[{\"name\": \"check_availability\", \"args\": {\"item_ids\": [\"DISH-010\", \"DISH-011\"]}}]",
         "output": "{\"all_available\": true, \"items\": [{\"id\": \"DISH-010\", \"name\": \"Чіа-пудинг на кокосовому молоці з манго\", \"status\": \"available\"}, {\"id\": \"DISH-011\", \"name\": \"Лимонад маракуйя-розмарин\", \"status\": \"available\"}]}",
         "tool_calls": [
@@ -293,12 +320,12 @@
             }
           }
         ],
-        "timestamp": "2026-11-25T15:03:51.982815+00:00",
-        "elapsed_ms": 2
+        "timestamp": "2026-11-26T17:13:08.059751+00:00",
+        "duration_ms": 1
       },
       {
-        "step": 3,
-        "node": "agent",
+        "step_number": 3,
+        "node_name": "agent",
         "input": "{\"all_available\": true, \"items\": [{\"id\": \"DISH-010\", \"name\": \"Чіа-пудинг на кокосовому молоці з манго\", \"status\": \"available\"}, {\"id\": \"DISH-011\", \"name\": \"Лимонад маракуйя-розмарин\", \"status\": \"available\"}]}",
         "output": "",
         "tool_calls": [
@@ -318,12 +345,12 @@
             }
           }
         ],
-        "timestamp": "2026-11-25T15:03:52.966388+00:00",
-        "elapsed_ms": 983
+        "timestamp": "2026-11-26T17:13:09.001861+00:00",
+        "duration_ms": 942
       },
       {
-        "step": 3,
-        "node": "tools",
+        "step_number": 3,
+        "node_name": "tools",
         "input": "[{\"name\": \"calculate_order\", \"args\": {\"items\": [{\"item_id\": \"DISH-010\", \"quantity\": 2}, {\"item_id\": \"DISH-011\", \"quantity\": 1}]}}]",
         "output": "{\"lines\": [{\"id\": \"DISH-010\", \"name\": \"Чіа-пудинг на кокосовому молоці з манго\", \"quantity\": 2, \"unit_price\": 145, \"line_total\": 290}, {\"id\": \"DISH-011\", \"name\": \"Лимонад маракуйя-розмарин\", \"quantity\": 1, \"unit_price\": 95, \"line_total\": 95}], \"total\": 385, \"currency\": \"UAH\", \"estimated_prep_time_min\": 5}",
         "tool_calls": [
@@ -343,29 +370,38 @@
             }
           }
         ],
-        "timestamp": "2026-11-25T15:03:52.968123+00:00",
-        "elapsed_ms": 1
+        "timestamp": "2026-11-26T17:13:09.003381+00:00",
+        "duration_ms": 1
       },
       {
-        "step": 4,
-        "node": "agent",
+        "step_number": 4,
+        "node_name": "agent",
         "input": "{\"lines\": [{\"id\": \"DISH-010\", \"name\": \"Чіа-пудинг на кокосовому молоці з манго\", \"quantity\": 2, \"unit_price\": 145, \"line_total\": 290}, {\"id\": \"DISH-011\", \"name\": \"Лимонад маракуйя-розмарин\", \"quantity\": 1, \"unit_price\": 95, \"line_total\": 95}], \"total\": 385, \"currency\": \"UAH\", \"estimated_prep_time_min\": 5}",
-        "output": "Замовлення складає 385 грн. Орієнтовний час приготування — 5 хвилин. Насолоджуйтеся! 🍓🍋",
+        "output": "Замовлення складає 385 грн. Орієнтовний час приготування — 5 хвилин. \n\nВаше замовлення:\n- 2 порції Чіа-пудингу на кокосовому молоці з манго (145 грн/порція)\n- 1 порція Лимонаду маракуйя-розмарин (95 грн/порція)",
         "tool_calls": [],
-        "timestamp": "2026-11-25T15:03:53.886998+00:00",
-        "elapsed_ms": 918
+        "timestamp": "2026-11-26T17:13:10.968489+00:00",
+        "duration_ms": 1965
+      },
+      {
+        "step_number": 4,
+        "node_name": "formatter",
+        "input": "Замовлення складає 385 грн. Орієнтовний час приготування — 5 хвилин. \n\nВаше замовлення:\n- 2 порції Чіа-пудингу на кокосовому молоці з манго (145 грн/порція)\n- 1 порція Лимонаду маракуйя-розмарин (95 грн/порція)",
+        "output": "Замовлення складає 385 грн. Орієнтовний час приготування — 5 хвилин. \n\nВаше замовлення:\n- 2 порції Чіа-пудингу на кокосовому молоці з манго (145 грн/порція)\n- 1 порція Лимонаду маракуйя-розмарин (95 грн/порція)",
+        "tool_calls": [],
+        "timestamp": "2026-11-26T17:13:11.919150+00:00",
+        "duration_ms": 950
       }
     ]
   },
   "TC-005": {
     "query": "Хочу замовити філе лосося і борщ. Порахуй суму.",
     "stop_reason": null,
-    "total_steps": 7,
-    "total_time_ms": 4758,
+    "log_entries": 8,
+    "total_time_ms": 3999,
     "trajectory": [
       {
-        "step": 1,
-        "node": "agent",
+        "step_number": 1,
+        "node_name": "agent",
         "input": "Хочу замовити філе лосося і борщ. Порахуй суму.",
         "output": "",
         "tool_calls": [
@@ -384,12 +420,12 @@
             }
           }
         ],
-        "timestamp": "2026-11-25T15:03:57.014536+00:00",
-        "elapsed_ms": 1086
+        "timestamp": "2026-11-26T17:13:13.002128+00:00",
+        "duration_ms": 1080
       },
       {
-        "step": 1,
-        "node": "tools",
+        "step_number": 1,
+        "node_name": "tools",
         "input": "[{\"name\": \"search_items\", \"args\": {\"query\": \"лосось\", \"category\": \"mains\"}}, {\"name\": \"search_items\", \"args\": {\"query\": \"борщ\", \"category\": \"soups\"}}]",
         "output": "{\"found\": 0, \"items\": [], \"unavailable_matches\": [{\"id\": \"DISH-006\", \"name\": \"Філе лосося на грилі зі спаржею\"}], \"note\": \"Ці страви підходять під запит, але зараз недоступні: повідом про це клієнту.\", \"message\": \"За заданими критеріями страв не знайдено. Перевірте параметри: тип страви задається в category, а не в query.\"} | {\"found\": 1, \"items\": [{\"id\": \"DISH-002\", \"name\": \"Борщ український з яловичиною та пампушками\", \"category\": \"soups\", \"price\": 195, \"available\": true, \"dietary_tags\": [], \"",
         "tool_calls": [
@@ -408,12 +444,12 @@
             }
           }
         ],
-        "timestamp": "2026-11-25T15:03:57.016796+00:00",
-        "elapsed_ms": 2
+        "timestamp": "2026-11-26T17:13:13.004035+00:00",
+        "duration_ms": 1
       },
       {
-        "step": 2,
-        "node": "agent",
+        "step_number": 2,
+        "node_name": "agent",
         "input": "{\"found\": 1, \"items\": [{\"id\": \"DISH-002\", \"name\": \"Борщ український з яловичиною та пампушками\", \"category\": \"soups\", \"price\": 195, \"available\": true, \"dietary_tags\": [], \"allergens\": [\"gluten\", \"dairy\"], \"prep_time_min\": 15}]}",
         "output": "",
         "tool_calls": [
@@ -426,12 +462,12 @@
             }
           }
         ],
-        "timestamp": "2026-11-25T15:03:57.653296+00:00",
-        "elapsed_ms": 636
+        "timestamp": "2026-11-26T17:13:13.609841+00:00",
+        "duration_ms": 605
       },
       {
-        "step": 2,
-        "node": "tools",
+        "step_number": 2,
+        "node_name": "tools",
         "input": "[{\"name\": \"check_availability\", \"args\": {\"item_ids\": [\"DISH-002\"]}}]",
         "output": "{\"all_available\": true, \"items\": [{\"id\": \"DISH-002\", \"name\": \"Борщ український з яловичиною та пампушками\", \"status\": \"available\"}]}",
         "tool_calls": [
@@ -444,12 +480,12 @@
             }
           }
         ],
-        "timestamp": "2026-11-25T15:03:57.654858+00:00",
-        "elapsed_ms": 1
+        "timestamp": "2026-11-26T17:13:13.611216+00:00",
+        "duration_ms": 1
       },
       {
-        "step": 3,
-        "node": "agent",
+        "step_number": 3,
+        "node_name": "agent",
         "input": "{\"all_available\": true, \"items\": [{\"id\": \"DISH-002\", \"name\": \"Борщ український з яловичиною та пампушками\", \"status\": \"available\"}]}",
         "output": "",
         "tool_calls": [
@@ -465,12 +501,12 @@
             }
           }
         ],
-        "timestamp": "2026-11-25T15:03:58.363015+00:00",
-        "elapsed_ms": 708
+        "timestamp": "2026-11-26T17:13:14.260498+00:00",
+        "duration_ms": 649
       },
       {
-        "step": 3,
-        "node": "tools",
+        "step_number": 3,
+        "node_name": "tools",
         "input": "[{\"name\": \"calculate_order\", \"args\": {\"items\": [{\"item_id\": \"DISH-002\", \"quantity\": 1}]}}]",
         "output": "{\"lines\": [{\"id\": \"DISH-002\", \"name\": \"Борщ український з яловичиною та пампушками\", \"quantity\": 1, \"unit_price\": 195, \"line_total\": 195}], \"total\": 195, \"currency\": \"UAH\", \"estimated_prep_time_min\": 15}",
         "tool_calls": [
@@ -486,38 +522,47 @@
             }
           }
         ],
-        "timestamp": "2026-11-25T15:03:58.364518+00:00",
-        "elapsed_ms": 1
+        "timestamp": "2026-11-26T17:13:14.261852+00:00",
+        "duration_ms": 1
       },
       {
-        "step": 4,
-        "node": "agent",
+        "step_number": 4,
+        "node_name": "agent",
         "input": "{\"lines\": [{\"id\": \"DISH-002\", \"name\": \"Борщ український з яловичиною та пампушками\", \"quantity\": 1, \"unit_price\": 195, \"line_total\": 195}], \"total\": 195, \"currency\": \"UAH\", \"estimated_prep_time_min\": 15}",
-        "output": "Замовлення на борщ український з яловичиною та пампушками буде виконане за 15 хвилин. Сума замовлення: 195 грн.",
+        "output": "Замовлення \"Борщ український з яловичиною та пампушками\" готовий за 15 хвилин. Сума замовлення: 195 грн.",
         "tool_calls": [],
-        "timestamp": "2026-11-25T15:03:59.376456+00:00",
-        "elapsed_ms": 1011
+        "timestamp": "2026-11-26T17:13:15.179582+00:00",
+        "duration_ms": 917
+      },
+      {
+        "step_number": 4,
+        "node_name": "formatter",
+        "input": "Замовлення \"Борщ український з яловичиною та пампушками\" готовий за 15 хвилин. Сума замовлення: 195 грн.",
+        "output": "Замовлення \"Борщ український з яловичиною та пампушками\" готовий за 15 хвилин. Сума замовлення: 195 грн.\n\nУвага: зараз недоступно: «Філе лосося на грилі зі спаржею».",
+        "tool_calls": [],
+        "timestamp": "2026-11-26T17:13:15.919976+00:00",
+        "duration_ms": 740
       }
     ]
   },
   "TC-006": {
     "query": "Хочу 2 чіа-пудинги і лимонад. Скільки це коштує і скільки чекати?",
     "stop_reason": "max_steps",
-    "total_steps": 3,
-    "total_time_ms": 3889,
+    "log_entries": 4,
+    "total_time_ms": 4778,
     "trajectory": [
       {
-        "step": 1,
-        "node": "agent",
+        "step_number": 1,
+        "node_name": "agent",
         "input": "Хочу 2 чіа-пудинги і лимонад. Скільки це коштує і скільки чекати?",
         "output": "",
         "tool_calls": [
           {
             "name": "search_items",
             "args": {
-              "query": "чіа-пудинг",
               "category": "desserts",
-              "limit": 2
+              "limit": 2,
+              "query": "чіа-пудинг"
             }
           },
           {
@@ -529,21 +574,21 @@
             }
           }
         ],
-        "timestamp": "2026-11-25T15:04:01.990416+00:00",
-        "elapsed_ms": 1303
+        "timestamp": "2026-11-26T17:13:17.232576+00:00",
+        "duration_ms": 1311
       },
       {
-        "step": 1,
-        "node": "tools",
-        "input": "[{\"name\": \"search_items\", \"args\": {\"query\": \"чіа-пудинг\", \"category\": \"desserts\", \"limit\": 2}}, {\"name\": \"search_items\", \"args\": {\"query\": \"лимонад\", \"category\": \"drinks\", \"limit\": 1}}]",
+        "step_number": 1,
+        "node_name": "tools",
+        "input": "[{\"name\": \"search_items\", \"args\": {\"category\": \"desserts\", \"limit\": 2, \"query\": \"чіа-пудинг\"}}, {\"name\": \"search_items\", \"args\": {\"query\": \"лимонад\", \"category\": \"drinks\", \"limit\": 1}}]",
         "output": "{\"found\": 1, \"items\": [{\"id\": \"DISH-010\", \"name\": \"Чіа-пудинг на кокосовому молоці з манго\", \"category\": \"desserts\", \"price\": 145, \"available\": true, \"dietary_tags\": [\"vegan\", \"vegetarian\", \"gluten_free\", \"lactose_free\"], \"allergens\": [], \"prep_time_min\": 5}]} | {\"found\": 1, \"items\": [{\"id\": \"DISH-011\", \"name\": \"Лимонад маракуйя-розмарин\", \"category\": \"drinks\", \"price\": 95, \"available\": true, \"dietary_tags\": [\"vegan\", \"vegetarian\", \"gluten_free\", \"lactose_free\"], \"allergens\": [], \"prep_time_min\"",
         "tool_calls": [
           {
             "name": "search_items",
             "args": {
-              "query": "чіа-пудинг",
               "category": "desserts",
-              "limit": 2
+              "limit": 2,
+              "query": "чіа-пудинг"
             }
           },
           {
@@ -555,12 +600,12 @@
             }
           }
         ],
-        "timestamp": "2026-11-25T15:04:01.992408+00:00",
-        "elapsed_ms": 1
+        "timestamp": "2026-11-26T17:13:17.234921+00:00",
+        "duration_ms": 2
       },
       {
-        "step": 2,
-        "node": "agent",
+        "step_number": 2,
+        "node_name": "agent",
         "input": "",
         "output": "STOP: max_steps",
         "tool_calls": [
@@ -574,8 +619,172 @@
             }
           }
         ],
-        "timestamp": "2026-11-25T15:04:02.709514+00:00",
-        "elapsed_ms": 717
+        "timestamp": "2026-11-26T17:13:17.949763+00:00",
+        "duration_ms": 714
+      },
+      {
+        "step_number": 2,
+        "node_name": "formatter",
+        "input": "[СТОП] Досягнуто ліміту кроків, відповідь часткова.",
+        "output": "⚠️ Досягнуто ліміту кроків, відповідь часткова. З'ясовано, що чіа-пудинг на кокосовому молоці з манго коштує 145 грн, а лимонад маракуйя-розмарин — 95 грн. Обидва страви доступні, не мають алергенів, підходять для веганів, вегетаріанців, без глютену та лактози. Підготовка кожного страви займає приблизно 5 хвилин.",
+        "tool_calls": [],
+        "timestamp": "2026-11-26T17:13:20.699469+00:00",
+        "duration_ms": 2749
+      }
+    ]
+  },
+  "TC-007": {
+    "query": "Покажи всі десерти",
+    "stop_reason": "timeout",
+    "log_entries": 4,
+    "total_time_ms": 2664,
+    "trajectory": [
+      {
+        "step_number": 1,
+        "node_name": "agent",
+        "input": "Покажи всі десерти",
+        "output": "",
+        "tool_calls": [
+          {
+            "name": "search_items",
+            "args": {
+              "max_price": 101
+            }
+          }
+        ],
+        "timestamp": "2026-11-26T17:13:21.702215+00:00",
+        "duration_ms": 1001
+      },
+      {
+        "step_number": 1,
+        "node_name": "tools",
+        "input": "[{\"name\": \"search_items\", \"args\": {\"max_price\": 101}}]",
+        "output": "{\"found\": 2, \"items\": [{\"id\": \"DISH-012\", \"name\": \"Лате на безлактозному молоці\", \"category\": \"drinks\", \"price\": 85, \"available\": true, \"dietary_tags\": [\"vegetarian\", \"gluten_free\", \"lactose_free\"], \"allergens\": [], \"prep_time_min\": 4}, {\"id\": \"DISH-011\", \"name\": \"Лимонад маракуйя-розмарин\", \"category\": \"drinks\", \"price\": 95, \"available\": true, \"dietary_tags\": [\"vegan\", \"vegetarian\", \"gluten_free\", \"lactose_free\"], \"allergens\": [], \"prep_time_min\": 5}]}",
+        "tool_calls": [
+          {
+            "name": "search_items",
+            "args": {
+              "max_price": 101
+            }
+          }
+        ],
+        "timestamp": "2026-11-26T17:13:21.708398+00:00",
+        "duration_ms": 6
+      },
+      {
+        "step_number": 1,
+        "node_name": "agent",
+        "input": "",
+        "output": "STOP: timeout",
+        "tool_calls": [],
+        "timestamp": "2026-11-26T17:13:21.709277+00:00",
+        "duration_ms": 0
+      },
+      {
+        "step_number": 1,
+        "node_name": "formatter",
+        "input": "[СТОП] Перевищено ліміт часу, відповідь часткова.",
+        "output": "⚠️ Перевищено ліміт часу, відповідь часткова. З результатів інструментів виявлено, що у вашому меню є 2 напої, які підходять під критерій \"безлактозне молоко\" та \"без глютену\". Обидва доступні для замовлення.",
+        "tool_calls": [],
+        "timestamp": "2026-11-26T17:13:23.365011+00:00",
+        "duration_ms": 1655
+      }
+    ]
+  },
+  "TC-008": {
+    "query": "Покажи всі десерти",
+    "stop_reason": "loop_detected",
+    "log_entries": 6,
+    "total_time_ms": 3429,
+    "trajectory": [
+      {
+        "step_number": 1,
+        "node_name": "agent",
+        "input": "Покажи всі десерти",
+        "output": "",
+        "tool_calls": [
+          {
+            "name": "search_items",
+            "args": {
+              "category": "desserts"
+            }
+          }
+        ],
+        "timestamp": "2026-11-26T17:13:23.367030+00:00",
+        "duration_ms": 0
+      },
+      {
+        "step_number": 1,
+        "node_name": "tools",
+        "input": "[{\"name\": \"search_items\", \"args\": {\"category\": \"desserts\"}}]",
+        "output": "{\"found\": 2, \"items\": [{\"id\": \"DISH-010\", \"name\": \"Чіа-пудинг на кокосовому молоці з манго\", \"category\": \"desserts\", \"price\": 145, \"available\": true, \"dietary_tags\": [\"vegan\", \"vegetarian\", \"gluten_free\", \"lactose_free\"], \"allergens\": [], \"prep_time_min\": 5}, {\"id\": \"DISH-009\", \"name\": \"Тарт татен з яблуками та ванільним морозивом\", \"category\": \"desserts\", \"price\": 155, \"available\": true, \"dietary_tags\": [\"vegetarian\"], \"allergens\": [\"gluten\", \"dairy\", \"eggs\"], \"prep_time_min\": 10}]}",
+        "tool_calls": [
+          {
+            "name": "search_items",
+            "args": {
+              "category": "desserts"
+            }
+          }
+        ],
+        "timestamp": "2026-11-26T17:13:23.368301+00:00",
+        "duration_ms": 1
+      },
+      {
+        "step_number": 2,
+        "node_name": "agent",
+        "input": "{\"found\": 2, \"items\": [{\"id\": \"DISH-010\", \"name\": \"Чіа-пудинг на кокосовому молоці з манго\", \"category\": \"desserts\", \"price\": 145, \"available\": true, \"dietary_tags\": [\"vegan\", \"vegetarian\", \"gluten_free\", \"lactose_free\"], \"allergens\": [], \"prep_time_min\": 5}, {\"id\": \"DISH-009\", \"name\": \"Тарт татен з яблуками та ванільним морозивом\", \"category\": \"desserts\", \"price\": 155, \"available\": true, \"dietary_tags\": [\"vegetarian\"], \"allergens\": [\"gluten\", \"dairy\", \"eggs\"], \"prep_time_min\": 10}]}",
+        "output": "",
+        "tool_calls": [
+          {
+            "name": "search_items",
+            "args": {
+              "category": "desserts"
+            }
+          }
+        ],
+        "timestamp": "2026-11-26T17:13:23.368592+00:00",
+        "duration_ms": 0
+      },
+      {
+        "step_number": 2,
+        "node_name": "tools",
+        "input": "[{\"name\": \"search_items\", \"args\": {\"category\": \"desserts\"}}]",
+        "output": "{\"found\": 2, \"items\": [{\"id\": \"DISH-010\", \"name\": \"Чіа-пудинг на кокосовому молоці з манго\", \"category\": \"desserts\", \"price\": 145, \"available\": true, \"dietary_tags\": [\"vegan\", \"vegetarian\", \"gluten_free\", \"lactose_free\"], \"allergens\": [], \"prep_time_min\": 5}, {\"id\": \"DISH-009\", \"name\": \"Тарт татен з яблуками та ванільним морозивом\", \"category\": \"desserts\", \"price\": 155, \"available\": true, \"dietary_tags\": [\"vegetarian\"], \"allergens\": [\"gluten\", \"dairy\", \"eggs\"], \"prep_time_min\": 10}]}",
+        "tool_calls": [
+          {
+            "name": "search_items",
+            "args": {
+              "category": "desserts"
+            }
+          }
+        ],
+        "timestamp": "2026-11-26T17:13:23.369692+00:00",
+        "duration_ms": 1
+      },
+      {
+        "step_number": 3,
+        "node_name": "agent",
+        "input": "",
+        "output": "STOP: loop_detected",
+        "tool_calls": [
+          {
+            "name": "search_items",
+            "args": {
+              "category": "desserts"
+            }
+          }
+        ],
+        "timestamp": "2026-11-26T17:13:23.369953+00:00",
+        "duration_ms": 0
+      },
+      {
+        "step_number": 3,
+        "node_name": "formatter",
+        "input": "[СТОП] Виявлено зациклення (повторюваний виклик інструменту), відповідь часткова.",
+        "output": "⚠️ Виявлено зациклення (повторюваний виклик інструменту), відповідь часткова. З'ясовано, що у категорії \"десерти\" є 2 страви:  \n1. **Чіа-пудинг на кокосовому молоці з манго** – доступний, вартість 145 грн, підходить для веганів, вегетаріанців, без глютenu та лактози.  \n2. **Тарт татен з яблуками та ванільним морозивом** – доступний, вартість 155 грн, підходить для вегетаріанців, але містить глютен, молоко та яйця.",
+        "tool_calls": [],
+        "timestamp": "2026-11-26T17:13:26.795174+00:00",
+        "duration_ms": 3425
       }
     ]
   }
